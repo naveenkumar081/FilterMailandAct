@@ -2,23 +2,24 @@ from dataclasses import dataclass
 from datetime import datetime
 
 class GCPOAuthDetails:
+    AUTH_URI =  "https://accounts.google.com/o/oauth2/auth"
+    CERT_URL = "https://www.googleapis.com/oauth2/v1/certs"
     SCOPES_FOR_GMAIL = ["https://www.googleapis.com/auth/gmail.modify",
                         'https://www.googleapis.com/auth/gmail.readonly']
-    AUTH_URI =  "https://accounts.google.com/o/oauth2/auth"
     TOKEN_URI =  "https://oauth2.googleapis.com/token"
-    CERT_URL = "https://www.googleapis.com/oauth2/v1/certs"
+
 
 @dataclass
 class MailDetails:
-    id: str
     from_address: str
-    to_address: str
-    thread_id: str
-    sent_time: datetime
-    subject: str
+    id: str
     labels: str
     mail_read: bool
     mail_snippet: str
+    sent_time: datetime
+    subject: str
+    thread_id: str
+    to_address: str
 
 @dataclass()
 class LabelDetails:
@@ -29,24 +30,25 @@ class LabelDetails:
 
 @dataclass
 class TokenData:
-    refresh_token: str
     expire_time: datetime
+    refresh_token: str
     user_id: str
 
 
 class MailClassifications:
-    UNREAD = "UNREAD"
-    READ = "READ"
-    FROM_ADDRESS = "From"
-    SUBJECT = "Subject"
     DELIVERED_TO = "Delivered-To"
     DATE = "Date"
+    FROM_ADDRESS = "From"
+    READ = "READ"
     RECEIVED  = "Received"
+    SUBJECT = "Subject"
+    UNREAD = "UNREAD"
+
 
 class TableAdapters:
+    LabelDetails = "label_details"
     MailDetails = "mail_details"
     TokenDetails = "token_details"
-    LabelDetails = "label_details"
 
 
 class HTMLForTable:
